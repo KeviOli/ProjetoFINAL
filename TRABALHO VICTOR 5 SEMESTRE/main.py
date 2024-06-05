@@ -7,7 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__, static_folder='static',template_folder='templates')
 CORS(app)
-app.secret_key = 'supersecretkey'  # chave secreta para a sessão
+app.secret_key = 'supersecretkey'  
 
 
 db_config = {
@@ -29,12 +29,9 @@ def pagina2():
 def inicio():
     return render_template('index.html')
 
-
-# Função para conectar ao banco de dados
 def connect_db():
     return psycopg2.connect(**db_config)
 
-# Rota para listar os livros
 @app.route('/livros', methods=['GET'])
 def get_livros():
     conn = connect_db()
@@ -44,7 +41,6 @@ def get_livros():
     conn.close()
     return jsonify(livros)
 
-# Rota para adicionar um novo livro
 @app.route('/livros', methods=['POST'])
 def add_livro():
     data = request.json
@@ -65,15 +61,12 @@ def add_livro():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-#listar livros
 @app.route('/livros/filtrar', methods=['GET'])
 def filtrar_livros():
-    # Obter os critérios de filtro da solicitação
     filtro_titulo = request.args.get('filtroTitulo')
     filtro_autor = request.args.get('filtroAutor')
     filtro_genero = request.args.get('filtroGenero')
 
-    # Construir a consulta SQL com base nos critérios de filtro
     sql = "SELECT * FROM Livros WHERE 1=1"  # Inicializa a query
 
     if filtro_titulo:
@@ -91,13 +84,11 @@ def filtrar_livros():
 
     return jsonify(livros_filtrados)
 
-# Rota para registrar um novo empréstimo
 @app.route('/emprestimos', methods=['POST'])
 def registrar_emprestimo():
     data = request.json
     livro_id = data['livro_id']
     
-    # Verificar se há cópias disponíveis do livro
     conn = connect_db()
     cur = conn.cursor(cursor_factory=RealDictCursor)
     cur.execute("SELECT copias_disponiveis FROM Livros WHERE id = %s", (livro_id,))
@@ -105,7 +96,6 @@ def registrar_emprestimo():
     
     if result and result['copias_disponiveis'] > 0:
         try:
-            # Decrementar o número de cópias disponíveis do livro no banco de dados
             cur.execute("UPDATE Livros SET copias_disponiveis = copias_disponiveis - 1 WHERE id = %s", (livro_id,))
             conn.commit()
             conn.close()
@@ -117,7 +107,6 @@ def registrar_emprestimo():
         conn.close()
         return jsonify({"error": "Não há cópias disponíveis para empréstimo"}), 400
 
-# Rota para devolver um livro
 @app.route('/livros/devolver', methods=['POST'])
 def devolver_livro():
     data = request.json
@@ -127,7 +116,6 @@ def devolver_livro():
         conn = connect_db()
         cur = conn.cursor()
         
-        # Incrementar o número de cópias disponíveis do livro no banco de dados
         cur.execute("UPDATE Livros SET copias_disponiveis = copias_disponiveis + 1 WHERE id = %s", (livro_id,))
         conn.commit()
         conn.close()
