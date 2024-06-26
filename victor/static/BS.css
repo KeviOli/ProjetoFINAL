@@ -1,0 +1,144 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.navbar {
+    --bs-bg-opacity: 1;
+    background-color: #081720 !important;
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.active:hover,
+.navbar-nav .nav-link.active:focus {
+    color: #95b4ca;
+}
+
+.container.text-center {
+    margin-top: 70px; /* Ajuste para compensar a altura da navbar */
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(50vh - 100px); /* Ajuste na altura para centralizar */
+    text-align: center;
+}
+
+.login-box {
+    width: 300px;
+    padding: 20px;
+    margin: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.login-box h2 {
+    margin-bottom: 20px;
+}
+
+.login-box label {
+    display: block;
+    text-align: left;
+    margin: 10px 0 5px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.login-box button:hover {
+    background-color: #0056b3;
+}
+
+.login-box #recover-password-button {
+    width: auto;
+    padding: 5px 10px;
+    margin-top: 10px;
+}
+
+.links {
+    margin-top: 20px;
+}
+
+.links a {
+    color: #007bff;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: white;
+    background: rgb(248, 124, 124);
+    display: none;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+footer {
+    background-color: #081720;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.textoCentral {
+    margin-top: 300px;
+}
+
+.movetextdown {
+    margin-top: 90px;
+}
+
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+
